@@ -13,9 +13,23 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="49dp"
-        android:layout_marginTop="207dp"
+        android:layout_marginStart="47dp"
+        android:layout_marginTop="124dp"
         android:hint="Enter Your Task" />
+
+
+    <EditText
+        android:id="@+id/valuetext"
+        android:layout_width="301dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="49dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="61dp"
+        android:hint="enter key" />
+
 
     <Button
         android:id="@+id/btnsend"
@@ -23,10 +37,20 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="65dp"
-        android:layout_marginTop="323dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="192dp"
         android:text="Click me"
-        android:textSize="25dp"/>
+        android:textSize="25dp" />
+
+    <TextView
+        android:id="@+id/textvie"
+        android:layout_width="304dp"
+        android:layout_height="148dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="51dp"
+        android:layout_marginTop="395dp"
+        android:textSize="25dp" />
 
 
 
