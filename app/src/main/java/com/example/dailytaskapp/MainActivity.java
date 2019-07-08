@@ -4,12 +4,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
@@ -18,13 +20,15 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+
 
 public class MainActivity extends AppCompatActivity {
 
    private  Button btn_senddata;
    private EditText text,idtext;
-   private TextView textview;
-
+   private ListView list;
+   private final ArrayList<String> showdata = new ArrayList<>();
 
    private Firebase reference;
 
@@ -38,8 +42,10 @@ public class MainActivity extends AppCompatActivity {
 
         btn_senddata = (Button) findViewById(R.id.btnsend);
         text = (EditText) findViewById(R.id.edittext);
-        textview = (TextView) findViewById(R.id.textvie);
+        list = (ListView) findViewById(R.id.list_item);
         idtext  = (EditText) findViewById(R.id.valuetext);
+
+
 
         btn_senddata.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,24 +66,45 @@ public class MainActivity extends AppCompatActivity {
                 }
 
 
-                reference.addValueEventListener(new com.firebase.client.ValueEventListener(){
+                final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,showdata);
+                list.setAdapter(arrayAdapter);
+
+                reference.addChildEventListener(new ChildEventListener() {
                     @Override
-                    public void onDataChange(com.firebase.client.DataSnapshot datasnapshot){
+                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
-                        String text = datasnapshot.getValue(String.class);
-                        textview.setText(text);
-
+                        String value = dataSnapshot.getValue(String.class);
+                        showdata.add(value);
+                        arrayAdapter.notifyDataSetChanged();
 
                     }
 
                     @Override
-                    public  void onCancelled (FirebaseError firebasaerror){
+                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
 
+                    }
+
+                    @Override
+                    public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                    }
+
+                    @Override
+                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                    }
+
+                    @Override
+                    public void onCancelled(FirebaseError firebaseError) {
 
                     }
                 });
+
+
+
             }
         });
+
 
 
 
